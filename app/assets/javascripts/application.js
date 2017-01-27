@@ -13,4 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+
+// vendor
+//= require flexslider/jquery.flexslider-min
+//= require masonry/masonry
+//= require scrollreveal/scrollreveal
+//= require js/bootstrap.min
+//= require contact
+//= require jquery.mb.YTPlayer
+
 //= require_tree .

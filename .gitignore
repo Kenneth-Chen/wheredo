@@ -15,3 +15,30 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore other unnecessary files.
+.DS_Store
+.project
+.idea
+/deploy.sh
+/cold
+.env
+
+# Ignore local ruby version
+.ruby-version
+
+# Ignore generated ER diagram
+erd.pdf
+
+# Ignore local rspec config
+.rspec
+
+# Ignore coverage reports
+coverage/
+
+# Ignore uploads
+public/
+
+# Ignore bower components
+bower_components/
+
