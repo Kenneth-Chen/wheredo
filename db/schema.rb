@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126065838) do
+ActiveRecord::Schema.define(version: 20170127034532) do
 
   create_table "users", force: :cascade do |t|
-    t.string   "phone",      limit: 100, null: false
+    t.string   "phone",       limit: 100,                 null: false
     t.string   "email"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.boolean  "sms_opt_out",             default: false, null: false
   end
 
 end
