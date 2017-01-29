@@ -772,7 +772,7 @@ Call to actions
 .cta-1 {
   padding: 40px 0;
 }
-.cta-1 h3 {
+.cta-1 h3, .cta-1 h1 {
   color: #fff;
 }
 .cta-1 p {
@@ -1262,6 +1262,12 @@ Split sections
 .split-section .split-content h2 {
   font-weight: 500;
   margin-bottom: 30px;
+}
+#split1 split-image {
+  background: image-url("1.png");
+}
+#split2 split-image {
+  background: image-url("2.png");
 }
 
 /*

@@ -56,21 +56,41 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 text-center">
+                        <% flash.each do |key, val| %>
+                          <%= render partial: "shared/flash", locals: {flash_type: key, message: val} %>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 text-center">
                         <h1>Maximize your revenue as an Uber or Lyft Driver</h1>
                         <p class="lead">Get SMS updates for the best locations and the biggest events, in advance</p>
                         <div class="space-10"></div>
-                    <a href="#" class="video-icon" data-toggle="modal" data-target="#video-popup" title="Play video"><i class="ion-ios-play"></i></a>
+                    <!-- <a href="#" class="video-icon" data-toggle="modal" data-target="#video-popup" title="Play video"><i class="ion-ios-play"></i></a> -->
                   <div class="space-30"></div>
                     <h5 class="text-uppercase">Sign up for our beta test for free.</h5>
-                    <form role="form" method="post" action="#" class="subscribe-form  mentos-newsletter">
+                    <%= form_for @user, as: :user, url: users_path, method: :post, role: "form", class: "subscribe-form mentos-newsletter" do |user| %>
+                        <div class="space-20"></div>
+                        <div class="row">
+                            <div class="input-group-lg col-md-offset-2 col-md-8">
+                                <%= user.text_field :phone, class: "form-control", placeholder: "Enter cell phone number to subscribe" %>
+                            </div>
+                        </div>
+                        <div class="space-20"></div>
+                        <div class="row">
+                            <div class="input-group-lg col-md-offset-2 col-md-8">
+                                <%= user.text_field :phone, class: "form-control", placeholder: "Enter cell phone number to subscribe" %>
+                            </div>
+                        </div>
+                        <div class="space-20"></div>
+                        <div class="row">
                             <div class="input-group input-group-lg">
-                                <input type="text" class="form-control" name="email" placeholder="Enter cell phone number to subscribe" size="90">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-lg btn-primary btn-radius" name="submit" type="submit">Subscribe</button>
+                                    <%= user.submit "Subscribe", class: "btn btn-lg btn-primary btn-radius" %>
                                 </span>
                             </div>
-                        </form>
-                    
+                        </div>
+                    <% end %>
                     </div>
                     
                 </div>
@@ -84,40 +104,28 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 text-center center-title">
-                        <h3 class="margin-b-30">Mentos is a simple and clean multipurpose landing page for your product or service. At vero eos et accusamus et iusto odio dignissimos ducimus qui.</h3>
-                        <p>
-                            Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard.
-                        </p>
+                        <h1 class="margin-b-30">How it works</h1>
                     </div>
                 </div>
             </div>
             <div class="space-60"></div>
             <div class="container-fluid no-padding">
                 <div class="row no-margin">
-                    <div class="col-sm-4 no-padding text-center">
-                        <div class="step-box bg-red">
-                            <h1>01<span></span></h1>
-                            <h3>Download</h3>
-                            <p>
-                                Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 no-padding text-center">
+                    <div class="col-sm-6 no-padding text-center">
                         <div class="step-box bg-blue">
-                            <h1>02<span></span></h1>
-                            <h3>Install</h3>
+                            <h1>1<span></span></h1>
+                            <h3>Subscribe</h3>
                             <p>
-                                Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour
+                                Subscribe with your location and your mobile phone number.
                             </p>
                         </div>
                     </div>
-                    <div class="col-sm-4 no-padding text-center">
+                    <div class="col-sm-6 no-padding text-center">
                         <div class="step-box bg-green">
-                            <h1>03<span></span></h1>
-                            <h3>Customization</h3>
+                            <h1>2<span></span></h1>
+                            <h3>Get texts</h3>
                             <p>
-                                Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour
+                                We'll text you at least a day in advance of big events in your area.
                             </p>
                         </div>
                     </div>
@@ -132,386 +140,72 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 text-center center-title margin-b-50">
-                        <h2>Awesome features</h2>
+                        <h2>Serving the SF Bay Area</h2>
                         <p class="lead">
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
+                            We're launching our beta test in the SF Bay Area, but will be expanding to other areas soon.
                         </p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-4 margin-b-30">
-                        <div class="feature-box">
-                            <i class="ion-mouse pull-left"></i>
-                            <div class="overflow-hidden">
-                                <h4>Customizable</h4>
-                                <p>
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                                </p>
-                            </div>
-                        </div>
-                    </div><!--col-sm-4-->
-                    <div class="col-sm-4 margin-b-30">
-                        <div class="feature-box colored"><!--.colored class for colored icon-->
-                            <i class="ion-edit pull-left"></i>
-                            <div class="overflow-hidden">
-                                <h4>Easy to use</h4>
-                                <p>
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                                </p>
-                            </div>
-                        </div>
-                    </div><!--col-sm-4-->
-                    <div class="col-sm-4 margin-b-30">
-                        <div class="feature-box">
-                            <i class="ion-iphone pull-left"></i>
-                            <div class="overflow-hidden">
-                                <h4>Mobile friendly</h4>
-                                <p>
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                                </p>
-                            </div>
-                        </div>
-                    </div><!--col-sm-4-->
-                </div><!--row-->
-                <div class="row">
-                    <div class="col-sm-4 margin-b-30">
-                        <div class="feature-box">
-                            <i class="ion-ios-email-outline pull-left"></i>
-                            <div class="overflow-hidden">
-                                <h4>24/7 support</h4>
-                                <p>
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                                </p>
-                            </div>
-                        </div>
-                    </div><!--col-sm-4-->
-                    <div class="col-sm-4 margin-b-30">
-                        <div class="feature-box">
-                            <i class="ion-ios-play-outline pull-left"></i>
-                            <div class="overflow-hidden">
-                                <h4>Video tutorials</h4>
-                                <p>
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                                </p>
-                            </div>
-                        </div>
-                    </div><!--col-sm-4-->
-                    <div class="col-sm-4 margin-b-30">
-                        <div class="feature-box colored"><!--.colored class for colored icon-->
-                            <i class="ion-ios-settings pull-left"></i>
-                            <div class="overflow-hidden">
-                                <h4>Free updates</h4>
-                                <p>
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                                </p>
-                            </div>
-                        </div>
-                    </div><!--col-sm-4-->
-                </div><!--row-->
             </div><!--container-->
             <div class="space-50"></div>
         </section>
         <!--end of features-->
 
-        <!--split section-->
-        <section id="split1" class="split-section">
-            <div class="split-image left-align hidden-sm hidden-xs" style="background: image-url(2.png);">
-
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 visible-sm visible-xs">
-                        <%= image_tag "2.png", class: "img-responsive" %>
-                    </div>
-                    <div class="col-md-5 col-md-offset-7">
-                        <div class="split-content">
-                            <h2>Create beautiful landing page in minutes</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum quas necessitatibus nesciunt temporibus, adipisci aliquid inventore et quaerat alias. 
-                            </p>
-                            <p>
-                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                            </p>
-                            <ul class="list-unstyled features-list">
-                                <li><i class="ion-checkmark"></i> Mobile friendly</li>
-                                <li><i class="ion-checkmark"></i> Easy to customize</li>
-                                <li><i class="ion-checkmark"></i> Sass files</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--split section end-->
-
-        <!--split section-->
-        <section id="split2" class="split-section gray-bg">
-            <div class="split-image right-align hidden-sm hidden-xs" style="background: image-url(1.png);">
-
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 visible-sm visible-xs">
-                        <%= image_tag "1.png", class: "img-responsive" %>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="split-content">
-                            <h2>Perfect for your next landing page</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum quas necessitatibus nesciunt temporibus, adipisci aliquid inventore et quaerat alias. 
-                            </p>
-                            <p>
-                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                            </p>
-                           <ul class="list-unstyled features-list">
-                                <li><i class="ion-checkmark"></i> Mobile friendly</li>
-                                <li><i class="ion-checkmark"></i> Easy to customize</li>
-                                <li><i class="ion-checkmark"></i> Sass files</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--split section end-->
-
-        <!--pricing start-->
-        <section id="pricing" class="pricing-section">
-            <div class="space-80"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center center-title margin-b-50">
-                        <h2>Pricing tables</h2>
-                        <p class="lead">
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                        </p>
-                    </div>
-                </div>
-                <ul class="row list-unstyled no-margin pricing-row">
-                    <li class="col-sm-4 margin-b-30 no-padding">
-                        <div class="price-box">
-                            <i class="ion-iphone price-icon"></i> 
-                            <div class="space-10"></div>
-                            <h4 class="text-capitalize">Single license</h4>
-                            <div class="price">
-                                <sup>$</sup>19
-                            </div>
-                            <ul class="list-unstyled features-list">
-                                <li><i class="ion-checkmark"></i> Complete file</li>
-                                <li><i class="ion-checkmark"></i> 1 Website</li>
-                                <li><i class="ion-checkmark"></i> 3 month support</li>
-                                <li><i class="ion-checkmark"></i> free updates</li>
-                                <li><i class="ion-close"></i> Customization</li>
-                            </ul>
-                            <a href="#" class="btn btn-lg btn-primary">Buy Now</a>
-                        </div>
-                    </li><!--price col end-->
-                    <li class="col-sm-4 margin-b-30 no-padding">
-                        <div class="price-box colored">
-                            <i class="ion-ipad price-icon"></i> 
-                            <div class="space-10"></div>
-                            <h4 class="text-capitalize">Multiple license</h4>
-                            <div class="price">
-                                <sup>$</sup>76
-                            </div>
-                            <ul class="list-unstyled features-list">
-                                <li><i class="ion-checkmark"></i> Complete file</li>
-                                <li><i class="ion-checkmark"></i> 2 Website</li>
-                                <li><i class="ion-checkmark"></i> 6 month support</li>
-                                <li><i class="ion-checkmark"></i> free updates</li>
-                                <li><i class="ion-checkmark"></i> Customization</li>
-                            </ul>
-                            <a href="#" class="btn btn-lg btn-default">Buy Now</a>
-                        </div>
-                    </li><!--price col end-->
-                    <li class="col-sm-4 margin-b-30 no-padding">
-                        <div class="price-box">
-                            <i class="ion-monitor price-icon"></i> 
-                            <div class="space-10"></div>
-                            <h4 class="text-capitalize">Extended license</h4>
-                            <div class="price">
-                                <sup>$</sup>850
-                            </div>
-                            <ul class="list-unstyled features-list">
-                                <li><i class="ion-checkmark"></i> Complete file</li>
-                                <li><i class="ion-checkmark"></i> Unlimited Website</li>
-                                <li><i class="ion-checkmark"></i> 12 month support</li>
-                                <li><i class="ion-checkmark"></i> free updates</li>
-                                <li><i class="ion-checkmark"></i> Customization</li>
-                            </ul>
-                            <a href="#" class="btn btn-lg btn-primary">Buy Now</a>
-                        </div>
-                    </li><!--price col end-->
-                </ul>
-            </div>
-            <div class="space-80"></div>
-        </section>
-        <!--pricing end-->
-
         <!--call to action-->
-        <div class="cta-1 bg-dark-blue">
+        <div id="faqs" class="cta-1 bg-dark-blue">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-7">
-                        <h3 class="text-capitalize">Perfect landing page for your product or service</h3>
-                        <p>
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                        </p>
-                    </div>
-                    <div class="col-sm-5 text-right scrollReveal sr-right sr-delay-2">
-                        <div class="space-20"></div>
-                        <a href="#" class="btn btn-md btn-white btn-lg">Buy Now <i class="ion-ios-cart"></i></a>
+                        <h1 class="text-capitalize">Frequently Asked Questions</h1>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-6 margin-b-30">
+                        <div class="faq-box">
+                            <h3>How to active newsletter form?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
+
+                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
+                            </p>
+                        </div>
+                    </div><!--col-end-->
+                    <div class="col-sm-6 margin-b-30">
+                        <div class="faq-box">
+                            <h3>Lorem ipsum dolor sit amet?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
+
+                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
+                            </p>
+                        </div>
+                    </div>
+                </div><!--row end-->
+                <div class="row">
+                    <div class="col-sm-6 margin-b-30">
+                        <div class="faq-box">
+                            <h3>How to active newsletter form?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
+
+                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
+                            </p>
+                        </div>
+                    </div><!--col-end-->
+                    <div class="col-sm-6 margin-b-30">
+                        <div class="faq-box">
+                            <h3>Lorem ipsum dolor sit amet?</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
+
+                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
+                            </p>
+                        </div>
+                    </div>
+                </div><!--row end-->
             </div>
         </div>
         <!--end call to action-->
-
-        <!--section why choose us start-->
-        <section id="aside1" class="pattern-bg light-bg">
-            <div class="space-80"></div>
-            <div class='container'>
-                <div class="row vertical-align-child">
-
-                    <div class="col-sm-6 ">
-                        <div class="left-title margin-b-30">
-                            <h3>Why choose mentos?</h3>
-                        </div>
-                        <div class="clearfix feature-box2">
-                            <i class="ion-iphone"></i>
-                            <div class="overflow-hidden">
-                                <h4>Mobile friendly</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-                                </p>
-                            </div>
-                        </div><!--left icon col end-->
-                        <div class="clearfix feature-box2">
-                            <i class="ion-android-textsms"></i>
-                            <div class="overflow-hidden">
-                                <h4>Working Php forms</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-                                </p>
-                            </div>
-                        </div><!--left icon col end-->
-                        <div class="clearfix feature-box2">
-                            <i class="ion-ios-paper"></i>
-                            <div class="overflow-hidden">
-                                <h4>20+ Sections</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-                                </p>
-                            </div>
-                        </div><!--left icon col end-->
-                        <div class="clearfix feature-box2">
-                            <i class="ion-social-twitter"></i>
-                            <div class="overflow-hidden">
-                                <h4>Bootstrap3</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-                                </p>
-                            </div>
-                        </div><!--left icon col end-->
-
-                    </div>
-                    <div class="col-sm-6">
-                        <%= image_tag "phone1.png", class: "img-responsive" %>
-                    </div>
-                </div>
-            </div>
-            <div class="space-80"></div>
-        </section>
-        <!--why choose us end-->
-
-        <!--faqs-->
-        <section id="faqs" class="faqs-section">
-            <div class="space-80"></div>
-            <div class="container">
-                <div class="row sr-bottom">
-                    <div class="col-md-8 col-md-offset-2 text-center center-title margin-b-50">
-                        <h2>Frequently Asked Questions</h2>
-                        <p class="lead">
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 margin-b-30">
-                        <div class="faq-box">
-                            <h4>How to active newsletter form?</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
-                            </p>
-                        </div>
-                    </div><!--col-end-->
-                    <div class="col-sm-6 margin-b-30">
-                        <div class="faq-box">
-                            <h4>Lorem ipsum dolor sit amet?</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
-                            </p>
-                        </div>
-                    </div>
-                </div><!--row end-->
-                <div class="row">
-                    <div class="col-sm-6 margin-b-30">
-                        <div class="faq-box">
-                            <h4>How to active contact form?</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
-                            </p>
-                        </div>
-                    </div><!--col-end-->
-                    <div class="col-sm-6 margin-b-30">
-                        <div class="faq-box">
-                            <h4>Is it bootstrap compatible?</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
-                            </p>
-                        </div>
-                    </div>
-                </div><!--row end-->
-                <div class="row">
-                    <div class="col-sm-6 margin-b-30">
-                        <div class="faq-box">
-                            <h4>How it full responsive design?</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
-                            </p>
-                        </div>
-                    </div><!--col-end-->
-                    <div class="col-sm-6 margin-b-30">
-                        <div class="faq-box">
-                            <h4>How to active newsletter form?</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
-                            </p>
-                        </div>
-                    </div>
-                </div><!--row end-->
-                <hr>
-                <div class='space-30'></div>
-                <div class="text-center sr-bottom">
-                    <p class="lead">Can't find your question?</p>
-                    <a href='#' class="btn btn-lg btn-primary">Contact us</a>
-                </div>
-            </div>
-            <div class="space-80"></div>
-        </section>
-        <!--faqs end-->
 
         <!--newsletter-->
         <section id="contact" class="contact-section gray-bg">
