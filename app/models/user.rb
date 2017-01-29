@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   validate :phone_format_ok
   after_validation :standardize_phone
 
+  has_and_belongs_to_many :locations
+
   def standardize_phone
     self.phone = Phony.normalize(self.phone)
   end
