@@ -10,4 +10,7 @@ class Location < ActiveRecord::Base
     city: 30,
     postcode: 40
   }
+
+  scope :regions, -> { where(level: Location.levels[:region]) }
+
 end

@@ -26,7 +26,7 @@
         <header class="navbar navbar-inverse navbar-default navbar-fixed-top navbar-transparent">
             <div class="container">
                 <div class="pull-right">
-                    <a href="#" class="btn btn-primary btn-navigation">Get started</a>
+                    <a href="#subscribe" class="btn btn-primary btn-navigation">Subscribe</a>
                 </div>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -41,7 +41,6 @@
                     <ul class="nav navbar-nav navbar-right scroll-to">
                        <li class="active"><a href="#home">Home</a></li>
                         <li><a href="#features">Features</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
                         <li><a href="#faqs">FAQS</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -64,33 +63,43 @@
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 text-center">
                         <h1>Maximize your revenue as an Uber or Lyft Driver</h1>
-                        <p class="lead">Get SMS updates for the best locations and the biggest events, in advance</p>
+                        <div id="subscribe"></div>
+                        <p class="lead">Get SMS updates for the biggest events occurring in your area, in advance.</p>
+                        <!-- <a href="#" class="video-icon" data-toggle="modal" data-target="#video-popup" title="Play video"><i class="ion-ios-play"></i></a> -->
+
                         <div class="space-10"></div>
-                    <!-- <a href="#" class="video-icon" data-toggle="modal" data-target="#video-popup" title="Play video"><i class="ion-ios-play"></i></a> -->
-                  <div class="space-30"></div>
-                    <h5 class="text-uppercase">Sign up for our beta test for free.</h5>
-                    <%= form_for @user, as: :user, url: users_path, method: :post, role: "form", class: "subscribe-form mentos-newsletter" do |user| %>
-                        <div class="space-20"></div>
-                        <div class="row">
-                            <div class="input-group-lg col-md-offset-2 col-md-8">
-                                <%= user.text_field :phone, class: "form-control", placeholder: "Enter cell phone number to subscribe" %>
+                        <div class="space-30"></div>
+                        <h5 class="text-uppercase">Sign up for our beta test for free.</h5>
+                        <h5>We'll only use your phone number to send location updates.</h5>
+                        <%= form_for @user, as: :user, url: users_path, method: :post, role: "form", class: "subscribe-form mentos-newsletter" do |user| %>
+                            <div class="space-20"></div>
+                            <div class="row">
+                                <div class="input-group-lg col-md-offset-4 col-md-4">
+                                    <%= user.text_field :phone, class: "form-control", placeholder: "Enter cell phone number" %>
+                                </div>
                             </div>
-                        </div>
-                        <div class="space-20"></div>
-                        <div class="row">
-                            <div class="input-group-lg col-md-offset-2 col-md-8">
-                                <%= user.text_field :phone, class: "form-control", placeholder: "Enter cell phone number to subscribe" %>
+                            <div class="space-20"></div>
+                            <div class="row text-left">
+                                <div class="col-md-2 col-md-offset-5">
+                                    <% Location.regions.each do |location| %>
+                                        <div class="checkbox">
+                                            <label>
+                                                <%= check_box_tag :location, location.name %>
+                                                <h5 style="display: inline"><%= location.name %></h5>
+                                            </label>
+                                        </div>
+                                    <% end %>
+                                </div>
                             </div>
-                        </div>
-                        <div class="space-20"></div>
-                        <div class="row">
-                            <div class="input-group input-group-lg">
-                                <span class="input-group-btn">
-                                    <%= user.submit "Subscribe", class: "btn btn-lg btn-primary btn-radius" %>
-                                </span>
+                            <div class="space-20"></div>
+                            <div class="row">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-btn">
+                                        <%= user.submit "Subscribe", class: "btn btn-lg btn-primary btn-radius" %>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    <% end %>
+                        <% end %>
                     </div>
                     
                 </div>
