@@ -1,7 +1,4 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
   validates :phone, presence: true
   validate :phone_format_ok
   after_validation :standardize_phone
