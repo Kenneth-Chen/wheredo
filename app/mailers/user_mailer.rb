@@ -4,6 +4,7 @@ class UserMailer < ActionMailer::Base
 
   def contact_us(name, email, message)
     @message = message
-    mail(to: "wheredoidrive@gmail.com", from: "#{@name} <#{@email}>", subject: "Question From Website")
+    from = "#{name} <#{email}>"
+    mail(to: "wheredoidrive@gmail.com", from: from, subject: "Question From Website")
   end
 end
