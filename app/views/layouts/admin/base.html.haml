@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    %title Admin: Dia&amp;Co
+    = stylesheet_link_tag 'back_end/application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'back_end/application', 'data-turbolinks-track' => true
+    = render partial: "admin/shared/javascript_initializer"
+    = csrf_meta_tags
+    = yield :head
+  %body
+    -unless @no_nav
+      = render "admin/shared/nav"
+    .container
+      -flash.each do |key, val|
+        = render partial: "admin/shared/flash", locals: {flash_type: key, message: val}
+      = yield
+
+    = yield :page_bottom if content_for?(:page_bottom)

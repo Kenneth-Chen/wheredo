@@ -1,0 +1,20 @@
+:coffee
+  root = exports ? this
+
+  root.dia = do (dia = root.dia || {}) ->
+    'use strict'
+
+    if dia.hasOwnProperty('views')
+      controllerName = "#{controller.controller_path.camelcase.gsub('::', '')}"
+      view = dia.views[controllerName]
+      action = "#{controller.action_name}"
+
+    $(document).ready ->
+      if view
+        view.all() if view.hasOwnProperty('all')
+        view[action]() if view.hasOwnProperty(action)
+
+      if dia.views.hasOwnProperty('All') && dia.views.All.hasOwnProperty('init')
+        dia.views.All.init()
+
+    dia

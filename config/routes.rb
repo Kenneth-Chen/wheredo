@@ -9,6 +9,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "home#index"
+
+    devise_for :users, controllers: {sessions: "sessions"}
+
+    get '/mass_send', to: 'sms#mass_send_new'
+    post '/mass_send', to: 'sms#mass_send'
     resources :users do
       collection do
         get :active
