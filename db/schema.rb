@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170129202754) do
+ActiveRecord::Schema.define(version: 20170130062930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,11 +36,21 @@ ActiveRecord::Schema.define(version: 20170129202754) do
   add_index "locations_users", ["location_id", "user_id"], name: "index_locations_users_on_location_id_and_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "phone",       limit: 100,                 null: false
+    t.string   "phone",                  limit: 100,              null: false
     t.string   "email"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.boolean  "sms_opt_out",             default: false, null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "subscription_state",                 default: 0,  null: false
+    t.datetime "pause_until"
+    t.string   "encrypted_password",                 default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.integer  "current_sign_in_ip"
+    t.integer  "last_sign_in_ip"
   end
 
 end

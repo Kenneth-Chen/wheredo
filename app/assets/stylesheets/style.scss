@@ -110,6 +110,13 @@ a, a:hover, a:focus, button:hover, button:focus {
   text-decoration: none;
 }
 
+footer a {
+  color: #6392bc;
+}
+footer a:hover, footer a:focus {
+  color: #73baf7;
+}
+
 blockquote {
   font-style: normal;
   font-weight: 400;
@@ -696,7 +703,7 @@ Intro setions style
   line-height: 70px;
   margin-bottom: 20px;
 }
-.hero-padded h1, .hero-padded p, .hero-padded h5 {
+.hero-padded h1, .hero-padded p, .hero-padded h4, .hero-padded h5 {
   color: #fff;
 }
 .hero-padded p {
@@ -719,6 +726,20 @@ Intro setions style
   color: #9fcf0e;
 }
 
+.overlay {
+  background-color: #000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  left: 0;
+  top: 0;
+}
+
+h5.faded {
+  color: #999;
+}
+
 .background-2 {
   background: image-url("woman-car-dashboard-web.jpg") no-repeat center center;
   background-size: cover;
@@ -727,7 +748,7 @@ Intro setions style
 }
 
 .background-3 {
-  background: url("../images/bg4.jpg") no-repeat center center;
+  background: image-url("bg4.jpg") no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
   background-position: 0 0;

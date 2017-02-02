@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %style( type="text/css" )
+      body { margin: 0; padding: 0; }
+      td.image-header-cell { height: 61px; background-color: #B8004A; color: #ffffff; text-align: center;  }
+      td.content-cell { font-family: Georgia; font: 14px/24px; padding-top: 40px; }
+      td.content-cell p { font-family: Georgia; font: 14px/24px; }
+      a { font-family: Georgia; font: 14px/24px; font-weight: bold; color: #B8004A; }
+      img { vertical-align: top; }
+      table#invoice-item-details {border:1px solid #979797;width:500px;}
+      table#invoice-item-details tr td {color:black;border:0;padding:20px 20px 20px 12px;background-color:white;}
+      table#invoice-item-details tr td.price {text-align:right;}
+      table#invoice-item-details tr.item td {border-bottom:1px solid #979797;}
+      table#invoice-item-details tr.summary td,
+      table#invoice-item-details tr.adjustments td,
+      table#invoice-item-details tr.credits td,
+      table#invoice-item-details tr.total td {padding-top:5px;padding-bottom:5px;border-bottom:0;font-weight:700;}
+      table#invoice-item-details tr.summary td.description,
+      table#invoice-item-details tr.adjustments td.description,
+      table#invoice-item-details tr.credits td.description,
+      table#invoice-item-details tr.total td.description {text-align:right;}
+      table#invoice-item-details tr.adjustments td.price,
+      table#invoice-item-details tr.credits td.price {font-weight:400;}
+      table#invoice-item-details tr.summary td {padding-top:30px;}
+      table#invoice-item-details tr.total td {padding-bottom:30px;color:#db1f6b;}
+
+  %body
+    %table( border="0"  cellpadding="0" cellspacing="0" width="100%" )
+      %tr
+        %td
+        %td.image-header-cell( style="height: 61px; background-color: #B8004A; color: #ffffff; text-align: center;" )
+          =image_tag "diaco_user_email_header.png", alt: "Dia&Co"
+        %td
+      %tr
+        %td
+        %td( width="600" )
+          %table( border="0" cellpadding="0" cellspacing="0" width="100%" )
+            %tr
+              %td( width="50" )
+              %td.content-cell( style="font-family: Georgia; font: 14px/24px; padding-top:40px;" )
+                =yield
+              %td( width="50" )
+        %td

@@ -1,0 +1,14 @@
+development:
+  unpause_user:
+    cron: "*/5 * * * *"
+    class: "UnpauseUserWorker"
+    queue: default
+    description: "Unpause users"
+    active_job: true
+production:
+  unpause_user:
+    cron: "0 * * * *"
+    class: "UnpauseUserWorker"
+    queue: default
+    description: "Unpause users"
+    active_job: true

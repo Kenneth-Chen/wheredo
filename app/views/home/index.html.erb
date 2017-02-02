@@ -25,9 +25,11 @@
         <!-- Static navbar -->
         <header class="navbar navbar-inverse navbar-default navbar-fixed-top navbar-transparent">
             <div class="container">
-                <div class="pull-right">
-                    <a href="#subscribe" class="btn btn-primary btn-navigation">Subscribe</a>
-                </div>
+                <% if session[:user_id].blank? %>
+                    <div class="pull-right">
+                        <a href="#subscribe" class="btn btn-primary btn-navigation">Subscribe</a>
+                    </div>
+                <% end %>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
@@ -40,7 +42,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right scroll-to">
                        <li class="active"><a href="#home">Home</a></li>
-                        <li><a href="#features">Features</a></li>
+                        <li><a href="#introduction">How it works</a></li>
                         <li><a href="#faqs">FAQS</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -52,6 +54,7 @@
 
         <!--start hero-->
         <section class="hero-padded background-2" id="home" data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 text-center">
@@ -67,39 +70,45 @@
                         <p class="lead">Get SMS updates for the biggest events occurring in your area, in advance.</p>
                         <!-- <a href="#" class="video-icon" data-toggle="modal" data-target="#video-popup" title="Play video"><i class="ion-ios-play"></i></a> -->
 
-                        <div class="space-10"></div>
-                        <div class="space-30"></div>
-                        <h5 class="text-uppercase">Sign up for our beta test for free.</h5>
-                        <h5>We'll only use your phone number to send location updates.</h5>
-                        <%= form_for @user, as: :user, url: users_path, method: :post, role: "form", class: "subscribe-form mentos-newsletter" do |user| %>
-                            <div class="space-20"></div>
-                            <div class="row">
-                                <div class="input-group-lg col-md-offset-4 col-md-4">
-                                    <%= user.text_field :phone, class: "form-control", placeholder: "Enter cell phone number" %>
+                        <% if session[:user_id].blank? %>
+                            <div class="space-10"></div>
+                            <hr/>
+                            <div class="space-30"></div>
+                            <h5 class="text-uppercase">Sign up for our beta test for free.</h5>
+                            <h5 class="faded">We'll only use your phone number to send you location updates.</h5>
+                            <%= form_for @user, as: :user, url: users_path, method: :post, role: "form", class: "subscribe-form mentos-newsletter" do |user| %>
+                                <div class="space-20"></div>
+                                <div class="row">
+                                    <div class="input-group-lg col-md-offset-4 col-md-4">
+                                        <%= user.text_field :phone, class: "form-control", placeholder: "Enter cell phone number" %>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="space-20"></div>
-                            <div class="row text-left">
-                                <div class="col-md-2 col-md-offset-5">
-                                    <% Location.regions.each do |location| %>
-                                        <div class="checkbox">
-                                            <label>
-                                                <%= check_box_tag :location, location.name %>
-                                                <h5 style="display: inline"><%= location.name %></h5>
-                                            </label>
-                                        </div>
-                                    <% end %>
+                                <div class="space-20"></div>
+                                <h4>Select regions where you drive:</h4>
+                                <div class="row text-left">
+                                    <div class="col-md-2 col-md-offset-5">
+                                        <% Location.regions.each_with_index do |location, index| %>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <% puts params %>
+                                                    <% checked = params[:locations].present? ? params[:locations].contains(location) : true %>
+                                                    <%= check_box_tag "locations[]", location.name, checked %>
+                                                    <h5 style="display: inline"><%= location.name %></h5>
+                                                </label>
+                                            </div>
+                                        <% end %>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="space-20"></div>
-                            <div class="row">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-btn">
-                                        <%= user.submit "Subscribe", class: "btn btn-lg btn-primary btn-radius" %>
-                                    </span>
+                                <div class="space-20"></div>
+                                <div class="row">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-btn">
+                                            <%= user.submit "Subscribe", class: "btn btn-lg btn-primary btn-radius" %>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        <% end %>
+                            <% end %>
+                        <% end %>                            
                     </div>
                     
                 </div>
@@ -120,21 +129,21 @@
             <div class="space-60"></div>
             <div class="container-fluid no-padding">
                 <div class="row no-margin">
-                    <div class="col-sm-6 no-padding text-center">
+                    <div class="col-md-4 col-md-offset-2 no-padding text-center">
                         <div class="step-box bg-blue">
                             <h1>1<span></span></h1>
                             <h3>Subscribe</h3>
                             <p>
-                                Subscribe with your location and your mobile phone number.
+                                Subscribe with your mobile phone number and the locations you'll be driving in.
                             </p>
                         </div>
                     </div>
-                    <div class="col-sm-6 no-padding text-center">
+                    <div class="col-md-4 no-padding text-center">
                         <div class="step-box bg-green">
                             <h1>2<span></span></h1>
                             <h3>Get texts</h3>
                             <p>
-                                We'll text you at least a day in advance of big events in your area.
+                                We'll text you at least a day in advance of big events that are about to happen in your areas.
                             </p>
                         </div>
                     </div>
@@ -143,22 +152,21 @@
         </section>
         <!--end introduction-->
 
-        <!--features-->
-        <section id="features">
+        <!--note-->
+        <section id="note">
             <div class="space-80"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center center-title margin-b-50">
-                        <h2>Serving the SF Bay Area</h2>
+                    <div class="col-md-8 col-md-offset-2 text-center margin-b-50">
+                        <h2>It's that simple.</h2>
                         <p class="lead">
-                            We're launching our beta test in the SF Bay Area, but will be expanding to other areas soon.
                         </p>
                     </div>
                 </div>
             </div><!--container-->
             <div class="space-50"></div>
         </section>
-        <!--end of features-->
+        <!--end of note-->
 
         <!--call to action-->
         <div id="faqs" class="cta-1 bg-dark-blue">
@@ -171,21 +179,17 @@
                 <div class="row">
                     <div class="col-sm-6 margin-b-30">
                         <div class="faq-box">
-                            <h3>How to active newsletter form?</h3>
+                            <h3>How do you know what locations will be hot?</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
+                                We use a combination of: 1. staff members in your area, scouring the internet every day, and 2. automated systems that crawl the web searching for big events.
                             </p>
                         </div>
                     </div><!--col-end-->
                     <div class="col-sm-6 margin-b-30">
                         <div class="faq-box">
-                            <h3>Lorem ipsum dolor sit amet?</h3>
+                            <h3>Are you only serving the SF Bay Area?</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
+                                Yes, at least for our initial beta test. We're planning to expand to other cities starting Q2 2017.
                             </p>
                         </div>
                     </div>
@@ -193,21 +197,17 @@
                 <div class="row">
                     <div class="col-sm-6 margin-b-30">
                         <div class="faq-box">
-                            <h3>How to active newsletter form?</h3>
+                            <h3>What's the cost?</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
+                                Free for the duration of the beta test, which will run through the end of March 2017. Beta testers will receive a substantial discount once we start charging for the service.
                             </p>
                         </div>
                     </div><!--col-end-->
                     <div class="col-sm-6 margin-b-30">
                         <div class="faq-box">
-                            <h3>Lorem ipsum dolor sit amet?</h3>
+                            <h3>How do I change my notification preferences?</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias.
-
-                                Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
+                                We will be building out a web interface to manage notification preferences very shortly. In the meantime, please text 'Pause 3 days' to 123 123 1234 in order to pause notifications for 3 days (or however many days you'd like to pause), or text 'Stop' to unsubscribe.
                             </p>
                         </div>
                     </div>
@@ -230,32 +230,32 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 text-center">
-                        <form method="post" action="#" class="mentos-contact">
-                        <div class="row">
-                            <div class="col-sm-12"> 
-                                <div class="row">
-                                    <div class="col-sm-12 margin-btm-20">
-                                        <input type="text" name="name" class="form-control" placeholder="Full Name...." />
-                                    </div>
-                                    <div class="col-sm-12 margin-btm-20">
-                                        <input type="text" name="email" class="form-control" placeholder="Email Address...." />
+                        <%= form_tag contact_us_path, method: :post, role: "form", class: "mentos-contact"%>
+                            <div class="row">
+                                <div class="col-sm-12"> 
+                                    <div class="row">
+                                        <div class="col-sm-12 margin-btm-20">
+                                            <input type="text" name="name" class="form-control" placeholder="Name" />
+                                        </div>
+                                        <div class="col-sm-12 margin-btm-20">
+                                            <input type="text" name="email" class="form-control" placeholder="Email" />
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-12">
+                                    <textarea name="message" class="form-control margin-btm-20" rows="5" placeholder="Message"></textarea>                                  
+                                </div>
                             </div>
-                            <div class="col-sm-12">
-                                <textarea name="message" class="form-control margin-btm-20" rows="5" placeholder="Message...."></textarea>                                  
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <div class="data-status"></div> <!-- data submit status -->
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 text-center">
-                                <div class="data-status"></div> <!-- data submit status -->
+                            <div class="row">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" name="submit" class="btn btn-lg btn-primary">Submit</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 text-right">
-                                <button type="submit" name="submit" class="btn btn-lg btn-primary">Submit</button>
-                            </div>
-                        </div>
                     </form>
                     </div>
                 </div>
@@ -265,55 +265,6 @@
         </section>
         <!--End newsletter-->     
 
-        <!--tab section-->
-        <!--        <section id="tabs" class="tabs-section">
-                    <div class="space-80"></div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2 text-center center-title margin-b-30">
-                                <h2>Tabs content example</h2>
-                                <p class="lead">
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
-                                <ul class="list-inline tabs-nav margin-b-50">
-                                    <li role="presentation" class="active"><a href="#t1" aria-controls="t1" role="tab" data-toggle="tab">Tab content 1</a></li>
-                                    <li role="presentation"><a href="#t2" aria-controls="t2" role="tab" data-toggle="tab">Tab content 2</a></li>
-                                    <li role="presentation"><a href="#t3" aria-controls="t3" role="tab" data-toggle="tab">Tab content 3</a></li>
-                                </ul>
-                                 Tab panes 
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="t1">
-                                        <h3 class="text-capitalize">tab Title 1</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias. Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
-                                        </p>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane" id="t2">
-                                        <h3 class="text-capitalize">tab Title 2</h3>
-                                        <p>
-                                            Consectetur adipisicing elit. Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias. Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
-                                        </p>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane" id="t3">
-                                        <h3 class="text-capitalize">tab Title 3</h3>
-                                        <p>
-                                            Eveniet quaerat animi, dolores inventore quisquam. Dolorem, rem qui harum alias. Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="space-50"></div>
-                </section>-->
-        <!--end tab section-->
-
-
-
         <!--footer start-->
         <footer id="footer" class="footer">
             <div class="space-50"></div>
@@ -322,9 +273,9 @@
                     <div class="col-sm-6 col-md-4 col-md-offset-3 margin-b-40">
                         <h4>About us</h4>
                         <ul class="list-unstyled">
-                            <li><a href="#">FAQs</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms & conditions</a></li>
+                            <li><a href="#faqs">FAQs</a></li>
+                            <li><a href="privacy">Privacy Policy</a></li>
+                            <li><a href="toc">Terms &amp; conditions</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-6 col-md-4 margin-b-40">
@@ -340,7 +291,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 text-center">
-                        &copy; Copyright 2017. wheredoidrive.com
+                        &copy; Copyright 2017, wheredoidrive.com
                     </div>
                 </div>
             </div>
