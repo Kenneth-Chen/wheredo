@@ -20,6 +20,7 @@ gem 'unicorn-rails'
 
 # General
 gem 'phony'
+gem 'rest-client'
 
 # Auth
 gem 'devise', '~> 4.2.0'
