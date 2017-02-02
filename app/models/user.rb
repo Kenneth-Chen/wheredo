@@ -45,11 +45,13 @@ class User < ActiveRecord::Base
     phone = Phony.format(Phony.normalize(self.phone))
     phone = Phony.format(Phony.normalize("1#{self.phone}")) if !Phony.plausible?(phone)
     unless Phony.plausible?(phone)
+      Rails.logger.warn "Phone number invalid: #{self.phone}"
       errors.add :phone, "Invalid phone number - please try again."
       return false
     end
     self.phone = phone
   rescue Phony::NormalizationError => e
+      Rails.logger.warn "Phone normalization error: #{self.phone}"
     errors.add :phone, "Invalid phone number - please try again."
     return false
   end
